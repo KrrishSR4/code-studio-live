@@ -11,12 +11,12 @@ interface LogsPanelProps {
 }
 
 const levelStyles: Record<LogEntry["level"], string> = {
-  info: "text-foreground/85",
-  success: "text-success",
-  warn: "text-warning",
-  error: "text-destructive",
-  command: "text-primary font-semibold",
-  system: "text-accent",
+  info: "text-[hsl(220_15%_85%)]",
+  success: "text-[hsl(137_70%_55%)]",
+  warn: "text-[hsl(38_95%_60%)]",
+  error: "text-[hsl(0_75%_65%)]",
+  command: "text-[hsl(137_75%_60%)] font-semibold",
+  system: "text-[hsl(150_75%_60%)]",
 };
 
 const levelPrefix: Record<LogEntry["level"], string> = {

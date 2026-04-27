@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { TopBar } from "@/components/runner/TopBar";
 import { RepoInputBar } from "@/components/runner/RepoInputBar";
 import { StepsRail } from "@/components/runner/StepsRail";
@@ -7,9 +7,11 @@ import { PreviewPanel } from "@/components/runner/PreviewPanel";
 import { StatusBar } from "@/components/runner/StatusBar";
 import { HistoryPanel } from "@/components/runner/HistoryPanel";
 import { useRunner } from "@/hooks/useRunner";
+import { cn } from "@/lib/utils";
 
 const Index = () => {
   const runner = useRunner();
+  const [showPreview, setShowPreview] = useState(true);
 
   // SEO
   useEffect(() => {
@@ -27,7 +29,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-background">
       <TopBar />
       <RepoInputBar
         onRun={runner.run}
@@ -35,30 +37,41 @@ const Index = () => {
         onRetry={runner.retry}
         status={runner.status}
         currentUrl={runner.repoUrl}
+        showPreview={showPreview}
+        onTogglePreview={() => setShowPreview(s => !s)}
       />
       <StepsRail steps={runner.steps} />
 
-      {/* Main workspace */}
       <main className="flex-1 container py-4">
-        <div className="grid grid-cols-12 gap-4 h-[calc(100vh-15rem)] min-h-[560px]">
-          {/* Sidebar - History */}
+        <div className="grid grid-cols-12 gap-3 h-[calc(100vh-13.5rem)] min-h-[520px]">
+          {/* History sidebar */}
           <aside className="hidden xl:block col-span-2">
             <HistoryPanel history={runner.history} onSelect={runner.run} />
           </aside>
 
           {/* Logs */}
-          <section className="col-span-12 lg:col-span-6 xl:col-span-5 min-h-[400px] lg:min-h-0">
+          <section
+            className={cn(
+              "col-span-12 min-h-[400px] lg:min-h-0",
+              showPreview
+                ? "lg:col-span-6 xl:col-span-5"
+                : "lg:col-span-12 xl:col-span-10"
+            )}
+          >
             <LogsPanel logs={runner.logs} status={runner.status} onClear={runner.clearLogs} />
           </section>
 
           {/* Preview */}
-          <section className="col-span-12 lg:col-span-6 xl:col-span-5 min-h-[400px] lg:min-h-0">
-            <PreviewPanel
-              status={runner.status}
-              projectType={runner.projectType}
-              repoName={runner.repoName}
-            />
-          </section>
+          {showPreview && (
+            <section className="col-span-12 lg:col-span-6 xl:col-span-5 min-h-[400px] lg:min-h-0">
+              <PreviewPanel
+                status={runner.status}
+                projectType={runner.projectType}
+                repoName={runner.repoName}
+                onClose={() => setShowPreview(false)}
+              />
+            </section>
+          )}
         </div>
       </main>
 

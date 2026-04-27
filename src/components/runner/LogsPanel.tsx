@@ -11,12 +11,12 @@ interface LogsPanelProps {
 }
 
 const levelStyles: Record<LogEntry["level"], string> = {
-  info: "text-foreground/85",
-  success: "text-success",
-  warn: "text-warning",
-  error: "text-destructive",
-  command: "text-primary font-semibold",
-  system: "text-accent",
+  info: "text-[hsl(220_15%_85%)]",
+  success: "text-[hsl(137_70%_55%)]",
+  warn: "text-[hsl(38_95%_60%)]",
+  error: "text-[hsl(0_75%_65%)]",
+  command: "text-[hsl(137_75%_60%)] font-semibold",
+  system: "text-[hsl(150_75%_60%)]",
 };
 
 const levelPrefix: Record<LogEntry["level"], string> = {
@@ -94,7 +94,7 @@ export const LogsPanel = ({ logs, status, onClear }: LogsPanelProps) => {
       {/* Logs body */}
       <div
         ref={scrollRef}
-        className="flex-1 overflow-y-auto font-mono text-[12.5px] leading-relaxed bg-[hsl(230_35%_4%)] relative"
+        className="flex-1 overflow-y-auto font-mono text-[12.5px] leading-relaxed bg-[hsl(var(--terminal-bg))] text-[hsl(var(--terminal-fg))] relative"
       >
         {logs.length === 0 ? (
           <EmptyState />

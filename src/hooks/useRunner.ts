@@ -103,7 +103,7 @@ export function useRunner() {
         repoUrl: url,
         repoName: parsed.name,
         projectType: type,
-        status: "success",
+        status: "success" as RunStatus,
         startedAt: startedAtRef.current,
         durationMs: duration,
         port,

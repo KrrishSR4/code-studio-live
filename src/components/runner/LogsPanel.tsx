@@ -94,7 +94,7 @@ export const LogsPanel = ({ logs, status, onClear }: LogsPanelProps) => {
       {/* Logs body */}
       <div
         ref={scrollRef}
-        className="flex-1 overflow-y-auto font-mono text-[12.5px] leading-relaxed bg-[hsl(230_35%_4%)] relative"
+        className="flex-1 overflow-y-auto font-mono text-[12.5px] leading-relaxed bg-[hsl(var(--terminal-bg))] text-[hsl(var(--terminal-fg))] relative"
       >
         {logs.length === 0 ? (
           <EmptyState />

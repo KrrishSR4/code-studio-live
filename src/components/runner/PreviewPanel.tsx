@@ -63,7 +63,7 @@ export const PreviewPanel = ({ status, projectType, repoName }: PreviewPanelProp
       </div>
 
       {/* Preview body */}
-      <div className="flex-1 relative bg-[hsl(230_35%_3%)] overflow-hidden">
+      <div className="flex-1 relative bg-[hsl(var(--terminal-bg))] overflow-hidden">
         {status === "idle" && <IdleState />}
         {isBuilding && <BuildingState status={status} />}
         {status === "failed" && <FailedState />}

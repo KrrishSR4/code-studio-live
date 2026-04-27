@@ -5,103 +5,170 @@
 @tailwind utilities;
 
 /* CodeRunner Cloud Design System
-   Dark futuristic developer tooling aesthetic with neon accents.
+   GitHub-inspired green accents · Light + Dark themes
    All colors HSL.
 */
 
 @layer base {
+  /* ============ LIGHT THEME (default) ============ */
   :root {
-    /* Deep space backgrounds */
-    --background: 230 35% 5%;
-    --background-elevated: 230 30% 8%;
-    --foreground: 220 20% 95%;
+    --background: 220 20% 97%;
+    --background-elevated: 0 0% 100%;
+    --foreground: 215 25% 15%;
 
-    --card: 230 30% 9%;
-    --card-foreground: 220 20% 95%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 15%;
 
-    --popover: 230 32% 7%;
-    --popover-foreground: 220 20% 95%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 15%;
 
-    /* Electric blue primary */
-    --primary: 217 100% 62%;
-    --primary-foreground: 230 40% 5%;
-    --primary-glow: 217 100% 70%;
+    /* GitHub green primary */
+    --primary: 137 55% 36%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 137 60% 48%;
 
-    /* Violet secondary */
-    --secondary: 264 83% 62%;
-    --secondary-foreground: 220 20% 98%;
+    /* Soft neutral secondary */
+    --secondary: 220 15% 92%;
+    --secondary-foreground: 215 25% 18%;
 
-    --muted: 230 25% 13%;
-    --muted-foreground: 220 12% 60%;
+    --muted: 220 15% 94%;
+    --muted-foreground: 215 15% 45%;
 
-    --accent: 264 90% 65%;
-    --accent-foreground: 220 20% 98%;
+    --accent: 137 50% 42%;
+    --accent-foreground: 0 0% 100%;
 
-    /* Status colors */
-    --success: 142 76% 50%;
-    --success-foreground: 230 40% 5%;
-    --warning: 38 95% 60%;
-    --warning-foreground: 230 40% 5%;
-    --destructive: 0 84% 62%;
-    --destructive-foreground: 220 20% 98%;
-    --info: 199 95% 60%;
+    /* Status */
+    --success: 137 60% 36%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --destructive: 0 75% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --info: 210 90% 50%;
 
-    /* Borders and inputs */
-    --border: 230 25% 16%;
-    --border-bright: 230 30% 22%;
-    --input: 230 25% 12%;
-    --ring: 217 100% 62%;
+    --border: 220 15% 88%;
+    --border-bright: 220 15% 80%;
+    --input: 220 15% 94%;
+    --ring: 137 55% 36%;
 
     --radius: 0.75rem;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(217 100% 62%), hsl(264 90% 65%));
-    --gradient-glow: linear-gradient(135deg, hsl(217 100% 62% / 0.18), hsl(264 90% 65% / 0.18));
-    --gradient-radial: radial-gradient(ellipse at top, hsl(217 100% 62% / 0.15), transparent 60%);
+    --gradient-primary: linear-gradient(135deg, hsl(137 55% 36%), hsl(150 60% 42%));
+    --gradient-glow: linear-gradient(135deg, hsl(137 55% 36% / 0.15), hsl(150 60% 42% / 0.15));
+    --gradient-radial: radial-gradient(ellipse at top, hsl(137 60% 48% / 0.12), transparent 60%);
     --gradient-mesh:
-      radial-gradient(at 20% 10%, hsl(217 100% 62% / 0.18) 0px, transparent 50%),
-      radial-gradient(at 80% 0%, hsl(264 90% 65% / 0.18) 0px, transparent 50%),
-      radial-gradient(at 80% 90%, hsl(199 95% 60% / 0.10) 0px, transparent 50%);
+      radial-gradient(at 15% 5%, hsl(137 60% 60% / 0.18) 0px, transparent 50%),
+      radial-gradient(at 85% 0%, hsl(150 70% 55% / 0.14) 0px, transparent 50%),
+      radial-gradient(at 80% 95%, hsl(180 60% 60% / 0.10) 0px, transparent 50%);
 
-    /* Glass surfaces */
-    --glass-bg: 230 30% 10% / 0.6;
-    --glass-border: 220 30% 30% / 0.3;
+    --glass-bg: 0 0% 100% / 0.7;
+    --glass-border: 220 15% 80% / 0.5;
 
-    /* Shadows */
-    --shadow-glow: 0 0 40px hsl(217 100% 62% / 0.35);
-    --shadow-glow-violet: 0 0 40px hsl(264 90% 65% / 0.35);
-    --shadow-elevated: 0 20px 50px -20px hsl(230 50% 2% / 0.7);
-    --shadow-inset: inset 0 1px 0 0 hsl(220 30% 100% / 0.06);
+    --shadow-glow: 0 0 30px hsl(137 55% 36% / 0.25);
+    --shadow-glow-violet: 0 0 30px hsl(150 60% 42% / 0.30);
+    --shadow-elevated: 0 12px 40px -12px hsl(215 30% 30% / 0.18);
+    --shadow-inset: inset 0 1px 0 0 hsl(0 0% 100% / 0.6);
 
-    /* Transitions */
+    /* Terminal (kept dark always for readability) */
+    --terminal-bg: 220 25% 10%;
+    --terminal-bg-header: 220 25% 14%;
+    --terminal-fg: 220 15% 92%;
+
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-    --sidebar-background: 230 30% 7%;
-    --sidebar-foreground: 220 20% 90%;
-    --sidebar-primary: 217 100% 62%;
-    --sidebar-primary-foreground: 230 40% 5%;
-    --sidebar-accent: 230 25% 13%;
-    --sidebar-accent-foreground: 220 20% 95%;
-    --sidebar-border: 230 25% 16%;
-    --sidebar-ring: 217 100% 62%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 215 25% 20%;
+    --sidebar-primary: 137 55% 36%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 15% 94%;
+    --sidebar-accent-foreground: 215 25% 18%;
+    --sidebar-border: 220 15% 88%;
+    --sidebar-ring: 137 55% 36%;
+  }
+
+  /* ============ DARK THEME ============ */
+  .dark {
+    --background: 220 27% 6%;
+    --background-elevated: 220 25% 9%;
+    --foreground: 220 15% 94%;
+
+    --card: 220 25% 9%;
+    --card-foreground: 220 15% 94%;
+
+    --popover: 220 25% 8%;
+    --popover-foreground: 220 15% 94%;
+
+    /* GitHub green for dark */
+    --primary: 137 70% 50%;
+    --primary-foreground: 220 30% 6%;
+    --primary-glow: 137 75% 60%;
+
+    --secondary: 220 20% 14%;
+    --secondary-foreground: 220 15% 94%;
+
+    --muted: 220 20% 13%;
+    --muted-foreground: 220 12% 60%;
+
+    --accent: 137 70% 55%;
+    --accent-foreground: 220 30% 6%;
+
+    --success: 137 70% 50%;
+    --success-foreground: 220 30% 6%;
+    --warning: 38 95% 60%;
+    --warning-foreground: 220 30% 6%;
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 220 15% 95%;
+    --info: 199 90% 60%;
+
+    --border: 220 20% 16%;
+    --border-bright: 220 20% 22%;
+    --input: 220 20% 12%;
+    --ring: 137 70% 50%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(137 70% 45%), hsl(150 75% 50%));
+    --gradient-glow: linear-gradient(135deg, hsl(137 70% 50% / 0.20), hsl(150 75% 50% / 0.20));
+    --gradient-radial: radial-gradient(ellipse at top, hsl(137 70% 50% / 0.18), transparent 60%);
+    --gradient-mesh:
+      radial-gradient(at 20% 10%, hsl(137 70% 50% / 0.18) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, hsl(150 75% 50% / 0.15) 0px, transparent 50%),
+      radial-gradient(at 80% 90%, hsl(199 90% 55% / 0.10) 0px, transparent 50%);
+
+    --glass-bg: 220 25% 10% / 0.6;
+    --glass-border: 220 20% 28% / 0.4;
+
+    --shadow-glow: 0 0 40px hsl(137 70% 50% / 0.40);
+    --shadow-glow-violet: 0 0 40px hsl(150 75% 50% / 0.40);
+    --shadow-elevated: 0 20px 50px -20px hsl(220 50% 2% / 0.75);
+    --shadow-inset: inset 0 1px 0 0 hsl(220 30% 100% / 0.06);
+
+    --terminal-bg: 220 30% 4%;
+    --terminal-bg-header: 220 25% 8%;
+    --terminal-fg: 220 15% 94%;
+
+    --sidebar-background: 220 27% 7%;
+    --sidebar-foreground: 220 15% 90%;
+    --sidebar-primary: 137 70% 50%;
+    --sidebar-primary-foreground: 220 30% 6%;
+    --sidebar-accent: 220 20% 13%;
+    --sidebar-accent-foreground: 220 15% 95%;
+    --sidebar-border: 220 20% 16%;
+    --sidebar-ring: 137 70% 50%;
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
+  * { @apply border-border; }
 
-  html, body, #root {
-    height: 100%;
-  }
+  html, body, #root { height: 100%; }
 
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
     background-image: var(--gradient-mesh);
     background-attachment: fixed;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   ::selection {
@@ -109,28 +176,18 @@
     color: hsl(var(--foreground));
   }
 
-  /* Custom scrollbars */
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-  ::-webkit-scrollbar-track {
-    background: hsl(var(--background));
-  }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: hsl(var(--background)); }
   ::-webkit-scrollbar-thumb {
     background: hsl(var(--border-bright));
     border-radius: 6px;
     border: 2px solid hsl(var(--background));
   }
-  ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--primary) / 0.6);
-  }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--primary) / 0.6); }
 }
 
 @layer components {
-  .font-mono {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-  }
+  .font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
 
   .glass {
     background: hsl(var(--glass-bg));
@@ -141,7 +198,7 @@
   }
 
   .glass-subtle {
-    background: hsl(230 30% 9% / 0.7);
+    background: hsl(var(--background-elevated) / 0.7);
     backdrop-filter: blur(12px);
     border: 1px solid hsl(var(--border));
   }
@@ -153,23 +210,17 @@
     color: transparent;
   }
 
-  .glow-primary {
-    box-shadow: var(--shadow-glow);
-  }
-
-  .glow-violet {
-    box-shadow: var(--shadow-glow-violet);
-  }
+  .glow-primary { box-shadow: var(--shadow-glow); }
+  .glow-violet { box-shadow: var(--shadow-glow-violet); }
 
   .grid-bg {
     background-image:
-      linear-gradient(hsl(var(--border) / 0.5) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--border) / 0.5) 1px, transparent 1px);
+      linear-gradient(hsl(var(--border) / 0.6) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.6) 1px, transparent 1px);
     background-size: 40px 40px;
     mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
   }
 
-  /* Animated gradient border */
   .border-gradient {
     position: relative;
     background: hsl(var(--card));
@@ -188,24 +239,9 @@
     pointer-events: none;
   }
 
-  /* Pulsing dot */
-  .pulse-dot {
-    position: relative;
-  }
-  .pulse-dot::after {
-    content: '';
-    position: absolute;
-    inset: -4px;
-    border-radius: 9999px;
-    background: currentColor;
-    opacity: 0.4;
-    animation: ping 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
-  }
-
-  /* Terminal cursor */
   .terminal-cursor::after {
     content: '▋';
-    color: hsl(var(--primary));
+    color: hsl(137 70% 55%);
     animation: blink 1s steps(2) infinite;
     margin-left: 2px;
   }
@@ -216,20 +252,16 @@
     background: linear-gradient(
       90deg,
       transparent,
-      hsl(var(--primary) / 0.15),
+      hsl(var(--primary) / 0.18),
       transparent
     );
     background-size: 200% 100%;
     animation: shimmer 2.2s linear infinite;
   }
 
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
+  .animate-float { animation: float 6s ease-in-out infinite; }
 
-  .text-shadow-glow {
-    text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
-  }
+  .text-shadow-glow { text-shadow: 0 0 20px hsl(var(--primary) / 0.5); }
 }
 
 @keyframes blink {

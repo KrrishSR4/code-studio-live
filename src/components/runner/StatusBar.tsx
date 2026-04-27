@@ -1,4 +1,4 @@
-import { Activity, CheckCircle2, XCircle, Loader2, Clock, Cpu, GitBranch } from "lucide-react";
+import { Activity, CheckCircle2, XCircle, Loader2, Clock, Cpu, GitBranch, type LucideIcon } from "lucide-react";
 import type { ProjectType, RunStatus } from "@/types/runner";
 import { projectTypeMeta } from "@/lib/runnerEngine";
 import { cn } from "@/lib/utils";
@@ -10,7 +10,7 @@ interface StatusBarProps {
   elapsedMs: number;
 }
 
-const statusMeta: Record<RunStatus, { label: string; color: string; icon: any }> = {
+const statusMeta: Record<RunStatus, { label: string; color: string; icon: LucideIcon }> = {
   idle: { label: "Idle", color: "text-muted-foreground", icon: Activity },
   cloning: { label: "Cloning", color: "text-info", icon: Loader2 },
   detecting: { label: "Detecting", color: "text-info", icon: Loader2 },

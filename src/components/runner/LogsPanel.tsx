@@ -165,7 +165,7 @@ const EmptyState = () => (
   </div>
 );
 
-const IconButton = ({ children, onClick, title, disabled }: any) => (
+const IconButton = ({ children, onClick, title, disabled }: { children: React.ReactNode; onClick: () => void; title: string; disabled?: boolean }) => (
   <button
     onClick={onClick}
     title={title}

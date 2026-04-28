@@ -16,7 +16,7 @@ const Index = () => {
 
   // SEO
   useEffect(() => {
-    document.title = "CodeRunner Cloud — Run any GitHub repo in a sandbox";
+    document.title = "RepoXpose — Paste. Run. Reveal.";
     const meta = (name: string, content: string) => {
       let el = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement | null;
       if (!el) {

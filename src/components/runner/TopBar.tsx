@@ -9,12 +9,14 @@ export const TopBar = () => {
           <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground">
             <Terminal className="h-4 w-4" strokeWidth={2.5} />
           </div>
-          <div className="flex items-baseline gap-1.5">
-            <h1 className="text-[15px] font-semibold tracking-tight">
-              CodeRunner
-            </h1>
-            <span className="text-[11px] font-medium text-muted-foreground tracking-wide uppercase">
-              Cloud
+          <div className="flex flex-col leading-tight">
+            <div className="flex items-baseline gap-1.5">
+              <h1 className="text-[15px] font-semibold tracking-tight">
+                RepoXpose
+              </h1>
+            </div>
+            <span className="text-[10px] font-medium text-muted-foreground tracking-wide">
+              Paste. Run. Reveal.
             </span>
           </div>
         </div>

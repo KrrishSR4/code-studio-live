@@ -10,7 +10,7 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
-const STORAGE_KEY = "coderunner-theme";
+const STORAGE_KEY = "repoxpose-theme";
 
 function getInitialTheme(): Theme {
   if (typeof window === "undefined") return "dark";

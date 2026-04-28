@@ -23,6 +23,7 @@ export function useRunner() {
   const [repoName, setRepoName] = useState<string | null>(null);
   const [history, setHistory] = useState<RunHistoryItem[]>([]);
   const [elapsedMs, setElapsedMs] = useState(0);
+  const [executionInfo, setExecutionInfo] = useState<ExecutionInfo | null>(null);
 
   const timeoutsRef = useRef<number[]>([]);
   const startedAtRef = useRef<number>(0);

@@ -12,28 +12,29 @@
 @layer base {
   /* ============ LIGHT THEME ============ */
   :root {
-    --background: 0 0% 100%;
-    --background-elevated: 220 20% 98.5%;
-    --foreground: 215 25% 12%;
+    /* Warm, tinted neutral — not pure white */
+    --background: 220 30% 96.5%;
+    --background-elevated: 220 28% 98.2%;
+    --foreground: 220 35% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 12%;
+    --card-foreground: 220 35% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 12%;
+    --popover-foreground: 220 35% 11%;
 
     /* GitHub green */
-    --primary: 137 50% 32%;
+    --primary: 137 52% 32%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 137 50% 28%;
+    --primary-hover: 137 52% 27%;
 
-    --secondary: 220 15% 95%;
-    --secondary-foreground: 215 25% 18%;
+    --secondary: 220 20% 93%;
+    --secondary-foreground: 220 30% 18%;
 
-    --muted: 220 15% 96%;
-    --muted-foreground: 215 12% 45%;
+    --muted: 220 22% 94%;
+    --muted-foreground: 220 12% 42%;
 
-    --accent: 137 50% 32%;
+    --accent: 137 52% 32%;
     --accent-foreground: 0 0% 100%;
 
     --success: 137 55% 32%;
@@ -44,10 +45,10 @@
     --destructive-foreground: 0 0% 100%;
     --info: 212 80% 45%;
 
-    --border: 220 14% 90%;
-    --border-bright: 220 14% 82%;
+    --border: 220 18% 87%;
+    --border-bright: 220 18% 78%;
     --input: 0 0% 100%;
-    --ring: 137 50% 32%;
+    --ring: 137 52% 32%;
 
     --radius: 0.5rem;
 

@@ -178,7 +178,7 @@ export function useRunner() {
   const clearLogs = useCallback(() => setLogs([]), []);
 
   return {
-    status, logs, steps, projectType, repoName, repoUrl, history, elapsedMs,
+    status, logs, steps, projectType, repoName, repoUrl, history, elapsedMs, executionInfo,
     run, stop, retry, clearLogs,
   };
 }

@@ -26,7 +26,7 @@ export const StatusBar = ({ status, projectType, repoName, elapsedMs }: StatusBa
   const isAnimated = ["cloning", "detecting", "installing", "running"].includes(status);
 
   return (
-    <div className="border-t border-border bg-background-elevated/60">
+    <div className="border-t border-border/80 bg-background/70 backdrop-blur-xl supports-[backdrop-filter]:bg-background/55">
       <div className="container flex items-center justify-between gap-4 h-9 text-[11.5px] font-medium">
         <div className="flex items-center gap-4 flex-wrap">
           <div className={cn("flex items-center gap-1.5", meta.color)}>

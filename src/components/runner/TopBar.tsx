@@ -3,7 +3,7 @@ import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 export const TopBar = () => {
   return (
-    <header className="border-b border-border bg-background-elevated/50 backdrop-blur supports-[backdrop-filter]:bg-background-elevated/70">
+    <header className="sticky top-0 z-40 border-b border-border/80 bg-background/70 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center justify-between gap-4">
         <div className="flex items-center gap-2.5">
           <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground">

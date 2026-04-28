@@ -10,7 +10,7 @@ export const StepsRail = ({ steps }: StepsRailProps) => {
   if (steps.length === 0) return null;
 
   return (
-    <div className="border-b border-border bg-background-elevated/40">
+    <div className="border-b border-border/70 bg-card/40 backdrop-blur-sm">
       <div className="container py-2">
         <div className="flex items-center gap-1 overflow-x-auto">
           {steps.map((step, i) => (

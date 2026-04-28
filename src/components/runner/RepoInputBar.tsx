@@ -38,7 +38,7 @@ export const RepoInputBar = ({
   };
 
   return (
-    <div className="border-b border-border bg-background">
+    <div className="border-b border-border/80 bg-background-elevated/40 backdrop-blur-sm">
       <div className="container py-3">
         <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
           <div className="relative flex-1">

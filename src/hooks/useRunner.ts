@@ -137,6 +137,14 @@ export function useRunner() {
       toast.success(`${parsed.name} is live`, {
         description: `Running on port ${port}`,
       });
+
+      setExecutionInfo({
+        status: "success",
+        stack: type,
+        port,
+        startupMs: duration,
+        dependencies: depCount,
+      });
     }, cumulative + 400);
     timeoutsRef.current.push(finalT);
   }, [clearTimers]);
@@ -145,10 +153,21 @@ export function useRunner() {
     clearTimers();
     setStatus("failed");
     setSteps(prev => prev.map(s => s.status === "active" ? { ...s, status: "failed" } : s));
+    const missingModules = ["axios", "express", "lodash", "dotenv", "react-router-dom"];
+    const missing = missingModules[Math.floor(Math.random() * missingModules.length)];
     setLogs(prev => [...prev,
-      makeLog("error", "✗ Execution stopped by user"),
+      makeLog("error", `✗ Error: Cannot find module '${missing}'`),
+      makeLog("error", `✗ Build failed — missing dependency`),
       makeLog("system", "▶ Container terminated"),
     ]);
+    setExecutionInfo(prev => prev ? {
+      ...prev,
+      status: "failed",
+      startupMs: Date.now() - startedAtRef.current,
+      errorReason: `Module not found: '${missing}' is not installed in the container.`,
+      suggestedFix: `Install the missing dependency and retry the build.`,
+      fixCommand: prev.stack === "python" ? `pip install ${missing}` : `npm install ${missing}`,
+    } : prev);
     toast.warning("Execution stopped");
   }, [clearTimers]);
 

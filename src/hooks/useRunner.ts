@@ -1,7 +1,18 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { LogEntry, ProjectType, RunHistoryItem, RunStatus, RunStep } from "@/types/runner";
-import { buildScript, buildSteps, detectProjectType, makeLog, parseRepo } from "@/lib/runnerEngine";
+import { buildScript, buildSteps, detectProjectType, makeLog, parseRepo, projectTypeMeta } from "@/lib/runnerEngine";
 import { toast } from "sonner";
+
+export interface ExecutionInfo {
+  status: "running" | "success" | "failed";
+  stack: ProjectType;
+  port: number | null;
+  startupMs: number | null;
+  dependencies: number;
+  errorReason?: string;
+  suggestedFix?: string;
+  fixCommand?: string;
+}
 
 export function useRunner() {
   const [status, setStatus] = useState<RunStatus>("idle");
@@ -12,6 +23,7 @@ export function useRunner() {
   const [repoName, setRepoName] = useState<string | null>(null);
   const [history, setHistory] = useState<RunHistoryItem[]>([]);
   const [elapsedMs, setElapsedMs] = useState(0);
+  const [executionInfo, setExecutionInfo] = useState<ExecutionInfo | null>(null);
 
   const timeoutsRef = useRef<number[]>([]);
   const startedAtRef = useRef<number>(0);
@@ -47,6 +59,19 @@ export function useRunner() {
     const initialSteps = buildSteps(type);
     setSteps(initialSteps);
     setStatus("cloning");
+
+    // Seed deterministic dependency count from repo name
+    const seed = parsed.name.split("").reduce((a, c) => a + c.charCodeAt(0), 0);
+    const depCount = type === "node" ? 180 + (seed % 260) : type === "python" ? 8 + (seed % 28) : 12 + (seed % 20);
+    const portEarly = type === "node" ? 3000 : type === "python" ? 5000 : 8000;
+
+    setExecutionInfo({
+      status: "running",
+      stack: type,
+      port: portEarly,
+      startupMs: null,
+      dependencies: depCount,
+    });
 
     // start elapsed ticker
     tickerRef.current = window.setInterval(() => {
@@ -112,6 +137,14 @@ export function useRunner() {
       toast.success(`${parsed.name} is live`, {
         description: `Running on port ${port}`,
       });
+
+      setExecutionInfo({
+        status: "success",
+        stack: type,
+        port,
+        startupMs: duration,
+        dependencies: depCount,
+      });
     }, cumulative + 400);
     timeoutsRef.current.push(finalT);
   }, [clearTimers]);
@@ -120,10 +153,21 @@ export function useRunner() {
     clearTimers();
     setStatus("failed");
     setSteps(prev => prev.map(s => s.status === "active" ? { ...s, status: "failed" } : s));
+    const missingModules = ["axios", "express", "lodash", "dotenv", "react-router-dom"];
+    const missing = missingModules[Math.floor(Math.random() * missingModules.length)];
     setLogs(prev => [...prev,
-      makeLog("error", "✗ Execution stopped by user"),
+      makeLog("error", `✗ Error: Cannot find module '${missing}'`),
+      makeLog("error", `✗ Build failed — missing dependency`),
       makeLog("system", "▶ Container terminated"),
     ]);
+    setExecutionInfo(prev => prev ? {
+      ...prev,
+      status: "failed",
+      startupMs: Date.now() - startedAtRef.current,
+      errorReason: `Module not found: '${missing}' is not installed in the container.`,
+      suggestedFix: `Install the missing dependency and retry the build.`,
+      fixCommand: prev.stack === "python" ? `pip install ${missing}` : `npm install ${missing}`,
+    } : prev);
     toast.warning("Execution stopped");
   }, [clearTimers]);
 
@@ -134,7 +178,7 @@ export function useRunner() {
   const clearLogs = useCallback(() => setLogs([]), []);
 
   return {
-    status, logs, steps, projectType, repoName, repoUrl, history, elapsedMs,
+    status, logs, steps, projectType, repoName, repoUrl, history, elapsedMs, executionInfo,
     run, stop, retry, clearLogs,
   };
 }

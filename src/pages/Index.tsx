@@ -6,6 +6,7 @@ import { LogsPanel } from "@/components/runner/LogsPanel";
 import { PreviewPanel } from "@/components/runner/PreviewPanel";
 import { StatusBar } from "@/components/runner/StatusBar";
 import { HistoryPanel } from "@/components/runner/HistoryPanel";
+import { SmartExecutionCard } from "@/components/runner/SmartExecutionCard";
 import { useRunner } from "@/hooks/useRunner";
 import { cn } from "@/lib/utils";
 
@@ -44,9 +45,14 @@ const Index = () => {
 
       <main className="flex-1 container py-4">
         <div className="grid grid-cols-12 gap-3 h-[calc(100vh-13.5rem)] min-h-[520px]">
-          {/* History sidebar */}
-          <aside className="hidden xl:block col-span-2">
-            <HistoryPanel history={runner.history} onSelect={runner.run} />
+          {/* Left panel: History + Smart Execution */}
+          <aside className="hidden xl:flex xl:flex-col col-span-2 gap-3 min-h-0">
+            <div className="flex-shrink-0 h-[208px]">
+              <HistoryPanel history={runner.history} onSelect={runner.run} />
+            </div>
+            {runner.executionInfo && (
+              <SmartExecutionCard info={runner.executionInfo} onRetry={runner.retry} />
+            )}
           </aside>
 
           {/* Logs */}

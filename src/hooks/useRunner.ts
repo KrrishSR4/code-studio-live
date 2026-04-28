@@ -60,6 +60,19 @@ export function useRunner() {
     setSteps(initialSteps);
     setStatus("cloning");
 
+    // Seed deterministic dependency count from repo name
+    const seed = parsed.name.split("").reduce((a, c) => a + c.charCodeAt(0), 0);
+    const depCount = type === "node" ? 180 + (seed % 260) : type === "python" ? 8 + (seed % 28) : 12 + (seed % 20);
+    const portEarly = type === "node" ? 3000 : type === "python" ? 5000 : 8000;
+
+    setExecutionInfo({
+      status: "running",
+      stack: type,
+      port: portEarly,
+      startupMs: null,
+      dependencies: depCount,
+    });
+
     // start elapsed ticker
     tickerRef.current = window.setInterval(() => {
       setElapsedMs(Date.now() - startedAtRef.current);

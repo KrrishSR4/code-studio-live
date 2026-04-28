@@ -1,7 +1,18 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { LogEntry, ProjectType, RunHistoryItem, RunStatus, RunStep } from "@/types/runner";
-import { buildScript, buildSteps, detectProjectType, makeLog, parseRepo } from "@/lib/runnerEngine";
+import { buildScript, buildSteps, detectProjectType, makeLog, parseRepo, projectTypeMeta } from "@/lib/runnerEngine";
 import { toast } from "sonner";
+
+export interface ExecutionInfo {
+  status: "running" | "success" | "failed";
+  stack: ProjectType;
+  port: number | null;
+  startupMs: number | null;
+  dependencies: number;
+  errorReason?: string;
+  suggestedFix?: string;
+  fixCommand?: string;
+}
 
 export function useRunner() {
   const [status, setStatus] = useState<RunStatus>("idle");

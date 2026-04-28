@@ -179,6 +179,7 @@
     background: hsl(var(--card));
     border: 1px solid hsl(var(--border));
     border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
   }
 
   .panel-header {
